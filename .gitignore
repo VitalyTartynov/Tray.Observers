@@ -4,3 +4,4 @@
 
 /SystemTrayModule/bin/
 /SystemTrayModule/obj/
+*.suo

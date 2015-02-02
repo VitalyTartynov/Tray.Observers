@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 using System.Windows.Forms;
 using SystemTrayModule.Properties;
 
@@ -15,7 +13,7 @@ namespace SystemTrayModule.Base
             _notifyIcon = new NotifyIcon
             {
                 Icon = Resources.system_network_icon,
-                Text = "Tray plugin container",
+                Text = @"Tray plugins container",
                 Visible = true
             };
 
