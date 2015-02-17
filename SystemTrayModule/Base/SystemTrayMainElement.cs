@@ -13,8 +13,9 @@ namespace SystemTrayModule.Base
         public SystemTrayMainElement()
         {
             _contextMenu = new ContextMenu();
-            _contextMenu.MenuItems.Add(new MenuItem("Exit", OnExitClick));
-
+            var menuItem = new MenuItem("Exit", OnExitClick);
+            _contextMenu.MenuItems.Add(menuItem);
+            
             _notifyIcon = new NotifyIcon
             {
                 Icon = Resources.system_network_icon,
@@ -34,7 +35,8 @@ namespace SystemTrayModule.Base
 
         private void OnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
         {
-            
+            //var connected = Pinger.Ping(new Uri("http://www.google.com/"));
+            //MessageBox.Show("Ping result = " + connected, "Results", MessageBoxButtons.OK);
         }
 
         private void OnMouseClick(object sender, MouseEventArgs mouseEventArgs)
