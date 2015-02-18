@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemTrayModule", "SystemTrayModule\SystemTrayModule.csproj", "{AC584136-457D-4C77-8731-4CC6B47004F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProstoPleerApi", "ProstoPleerApi\ProstoPleerApi.csproj", "{627A6ADE-BDE6-4BFD-9759-C6B1EDEB370B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AC584136-457D-4C77-8731-4CC6B47004F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC584136-457D-4C77-8731-4CC6B47004F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC584136-457D-4C77-8731-4CC6B47004F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{627A6ADE-BDE6-4BFD-9759-C6B1EDEB370B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{627A6ADE-BDE6-4BFD-9759-C6B1EDEB370B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{627A6ADE-BDE6-4BFD-9759-C6B1EDEB370B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{627A6ADE-BDE6-4BFD-9759-C6B1EDEB370B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
