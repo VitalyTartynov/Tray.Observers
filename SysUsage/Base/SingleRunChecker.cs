@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SystemTrayModule.Base
+namespace SysUsageTrayMonitor.Base
 {
     class SingleRunChecker : IDisposable
     {
@@ -23,6 +23,7 @@ namespace SystemTrayModule.Base
         public void Dispose()
         {
             _singleRunMutex?.ReleaseMutex();
+            GC.SuppressFinalize(this);
         }
     }
 }

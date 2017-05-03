@@ -1,83 +1,95 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
-using SystemTrayModule.Properties;
 
-namespace SystemTrayModule.Base
+namespace SysUsageTrayMonitor.Base
 {
     class SystemTrayApplication : IDisposable
     {
-        private readonly NotifyIcon _notifyIcon;
-        private MenuItem _cpu;
-        private MenuItem _memory;
+        private Timer _timer;
+        private readonly NotifyIcon _cpuIcon;
+        private readonly NotifyIcon _memoryIcon;
+        private readonly NotifyIcon _ioIcon;
 
-        private PerformanceCounter cpuCounter;
-        private PerformanceCounter ramCounter;
+        private PerformanceCounter _cpuCounter;
+        private PerformanceCounter _memoryCounter;
+        private PerformanceCounter _ioCounter;
 
         public SystemTrayApplication()
         {
+            _timer = new Timer
+            {
+                Interval = 1000                
+            };
+            _timer.Tick += Timer_Tick;
+
             var contextMenu = new ContextMenu();
             var exitItem = new MenuItem("Exit", OnExitClick);
             contextMenu.MenuItems.Add(exitItem);
 
-            _cpu = new MenuItem(string.Empty);
-            contextMenu.MenuItems.Add(_cpu);
-
-            _memory = new MenuItem(string.Empty);
-            contextMenu.MenuItems.Add(_memory);
-
-            _notifyIcon = new NotifyIcon
+            _cpuIcon = new NotifyIcon
             {
-                Icon = Resources.system_network_icon,
-                Text = @"Tray plugins container",
+                Text = "CPU",
                 Visible = true,
+                ContextMenu = contextMenu
             };
 
-            _notifyIcon.MouseClick += OnMouseClick;
-            _notifyIcon.MouseDoubleClick += OnMouseDoubleClick;
-            _notifyIcon.ContextMenu = contextMenu;
-            _notifyIcon.MouseDown += NotifyIconOnMouseDown;
-            
-            _notifyIcon.BalloonTipShown += NotifyIconOnBalloonTipShown;
-            _notifyIcon.MouseMove += NotifyIconOnBalloonTipShown;
+            _memoryIcon = new NotifyIcon
+            {
+                Text = "Memory",
+                Visible = true,
+                ContextMenu = contextMenu
+            };
 
-            cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-            ramCounter = new PerformanceCounter("Memory", "Available MBytes");
+            _ioIcon = new NotifyIcon
+            {
+                Text = "I/O",
+                Visible = true,
+                ContextMenu = contextMenu
+            };
+
+            _cpuCounter = new PerformanceCounter("Processor Information", "% Priority Time", "_Total");
+            _ioCounter = new PerformanceCounter("Физический диск", "% активности диска", "_Total");
+            _memoryCounter = new PerformanceCounter("Память", "% использования выделенной памяти");
+
+            _timer.Start();
         }
 
-        private void NotifyIconOnBalloonTipShown(object sender, EventArgs eventArgs)
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            //_notifyIcon.BalloonTipTitle = "title";
-            //_notifyIcon.BalloonTipText = $"CPU: {cpuCounter.NextValue()}% RAM: {ramCounter.NextValue()}Mb";
-            _notifyIcon.Text = $"CPU: {cpuCounter.NextValue()}% RAM: {ramCounter.NextValue()}Mb";
+            _cpuIcon.Icon = CreateIcon(Convert.ToInt32(_cpuCounter.NextValue()), Color.OrangeRed);
+            _memoryIcon.Icon = CreateIcon(Convert.ToInt32(_memoryCounter.NextValue()), Color.Yellow);
+            _ioIcon.Icon = CreateIcon(Convert.ToInt32(_ioCounter.NextValue()), Color.LightBlue);
         }
 
-        private void NotifyIconOnMouseDown(object sender, MouseEventArgs mouseEventArgs)
+        private Icon CreateIcon(int value, Color color)
         {
-            _cpu.Text = $"CPU: {cpuCounter.NextValue()}%";
-            _memory.Text = $"RAM: {ramCounter.NextValue()}Mb";
+            var brush = new SolidBrush(color);
+            var bitmap = new Bitmap(32, 32);
+            var graphics = Graphics.FromImage(bitmap);
+            var leftMargin = value > 9 ? 1 : 7;
+            graphics.DrawString(value.ToString(), new Font("Tahoma", 16, FontStyle.Bold), brush, leftMargin, 2);
+
+            return Icon.FromHandle(bitmap.GetHicon());
         }
 
         private void OnExitClick(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private void OnMouseDoubleClick(object sender, MouseEventArgs mouseEventArgs)
-        {
-            throw new NotImplementedException();
-            //var connected = Pinger.Ping(new Uri("http://www.google.com/"));
-            //MessageBox.Show("Ping result = " + connected, "Results", MessageBoxButtons.OK);
-        }
-
-        private void OnMouseClick(object sender, MouseEventArgs mouseEventArgs)
-        {
-        }
+        }        
 
         public void Dispose()
         {
-            _notifyIcon.Visible = false;
-            _notifyIcon.Dispose();
+            _timer.Stop();
+            _cpuIcon.Visible = false;
+            _memoryIcon.Visible = false;
+            _ioIcon.Visible = false;
+            _cpuIcon.Dispose();
+            _memoryIcon.Dispose();
+            _ioIcon.Dispose();
+
+            GC.SuppressFinalize(this);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
-using SystemTrayModule.Base;
+using SysUsageTrayMonitor.Base;
 
-namespace SystemTrayModule
+namespace SysUsageTrayMonitor
 {
     static class Program
     {
