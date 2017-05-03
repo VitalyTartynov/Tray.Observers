@@ -2,8 +2,7 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/SystemTrayModule/bin/
-/SystemTrayModule/obj/
-/ProstoPleerApi/bin/
-/ProstoPleerApi/obj/
+*/bin/
+*/obj/
 *.suo
+*.user
