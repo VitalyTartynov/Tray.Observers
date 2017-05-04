@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
 
-namespace SysUsageTrayMonitor.Base
+namespace SysUsageTrayMonitor
 {
     class SingleRunChecker : IDisposable
     {

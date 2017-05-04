@@ -1,24 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using SysUsageTrayMonitor.Resources;
 
-namespace SysUsageTrayMonitor.Base
+namespace SysUsageTrayMonitor
 {
     class SystemTrayApplication : IDisposable
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        extern static bool DestroyIcon(IntPtr handle);
+        private readonly Timer _timer;
 
-        private Timer _timer;
-        private readonly NotifyIcon _cpuIcon;
-        private readonly NotifyIcon _memoryIcon;
-        private readonly NotifyIcon _ioIcon;
-
-        private PerformanceCounter _cpuCounter;
-        private PerformanceCounter _memoryCounter;
-        private PerformanceCounter _ioCounter;
+        private readonly ICollection<TrayIcon> _icons = new List<TrayIcon>();
 
         public SystemTrayApplication()
         {
@@ -29,65 +22,26 @@ namespace SysUsageTrayMonitor.Base
             _timer.Tick += Timer_Tick;
 
             var contextMenu = new ContextMenu();
-            var exitItem = new MenuItem("Exit", OnExitClick);
+            var exitItem = new MenuItem(Localization.Exit, OnExitClick);
             contextMenu.MenuItems.Add(exitItem);
 
-            _cpuIcon = new NotifyIcon
-            {
-                Text = "CPU",
-                Visible = true,
-                ContextMenu = contextMenu
-            };
-
-            _memoryIcon = new NotifyIcon
-            {
-                Text = "Memory",
-                Visible = true,
-                ContextMenu = contextMenu
-            };
-
-            _ioIcon = new NotifyIcon
-            {
-                Text = "I/O",
-                Visible = true,
-                ContextMenu = contextMenu
-            };
-
-            _cpuCounter = new PerformanceCounter("Processor Information", "% Priority Time", "_Total");
-            _ioCounter = new PerformanceCounter("Физический диск", "% активности диска", "_Total");
-            _memoryCounter = new PerformanceCounter("Память", "% использования выделенной памяти");
-
+            _icons.Add(new TrayIcon(name: Localization.UsingCpuTooltip, color: Color.OrangeRed,
+                counter: new PerformanceCounter("Processor Information", "% Priority Time", "_Total"),
+                menu: contextMenu));
+            _icons.Add(new TrayIcon(name: Localization.UsingMemoryTooltip, color: Color.Yellow,
+                counter: new PerformanceCounter("Память", "% использования выделенной памяти"), menu: contextMenu));
+            _icons.Add(new TrayIcon(name: Localization.UsingDiskTooltip, color: Color.LightBlue,
+                counter: new PerformanceCounter("Физический диск", "% активности диска", "_Total"), menu: contextMenu));
+            
             _timer.Start();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            try
+            foreach (var trayIcon in _icons)
             {
-                if (_cpuIcon != null && _cpuIcon.Icon != null) DestroyIcon(_cpuIcon.Icon.Handle);
-                if (_memoryIcon != null && _memoryIcon.Icon != null) DestroyIcon(_memoryIcon.Icon.Handle);
-                if (_ioIcon != null && _ioIcon.Icon != null) DestroyIcon(_ioIcon.Icon.Handle);
-
-                _cpuIcon.Icon = CreateIcon(Convert.ToInt32(_cpuCounter.NextValue()), Color.OrangeRed);
-                _memoryIcon.Icon = CreateIcon(Convert.ToInt32(_memoryCounter.NextValue()), Color.Yellow);
-                _ioIcon.Icon = CreateIcon(Convert.ToInt32(_ioCounter.NextValue()), Color.LightBlue);
+                trayIcon.Update();
             }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private Icon CreateIcon(int value, Color color)
-        {
-            var brush = new SolidBrush(color);
-            var bitmap = new Bitmap(32, 32);
-            var font = new Font("Tahoma", 16, FontStyle.Bold);
-            var graphics = Graphics.FromImage(bitmap);
-            var leftMargin = value > 9 ? 1 : 7;
-            graphics.DrawString(value.ToString(), font, brush, leftMargin, 2);
-
-            return Icon.FromHandle(bitmap.GetHicon());
         }
 
         private void OnExitClick(object sender, EventArgs e)
@@ -98,12 +52,12 @@ namespace SysUsageTrayMonitor.Base
         public void Dispose()
         {
             _timer.Stop();
-            _cpuIcon.Visible = false;
-            _memoryIcon.Visible = false;
-            _ioIcon.Visible = false;
-            _cpuIcon.Dispose();
-            _memoryIcon.Dispose();
-            _ioIcon.Dispose();
+
+            foreach (var trayIcon in _icons)
+            {
+                trayIcon.Dispose();
+            }
+            _icons.Clear();
 
             GC.SuppressFinalize(this);
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using SysUsageTrayMonitor.Base;
+using SysUsageTrayMonitor.Resources;
 
 namespace SysUsageTrayMonitor
 {
@@ -11,12 +11,12 @@ namespace SysUsageTrayMonitor
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             using (var runner = new SingleRunChecker())
             {
                 if (!runner.ApplicationMayRun)
                 {
-                    MessageBox.Show("Приложение уже запущено");
+                    MessageBox.Show(Localization.ApplicationIsAlreadyRunning, Localization.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
