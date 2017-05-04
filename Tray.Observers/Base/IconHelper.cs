@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Runtime.InteropServices;
 
-namespace SysUsageTrayMonitor
+namespace Tray.Observers
 {
     static class IconHelper
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{AC584136-457D-4C77-8731-4CC6B47004F4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SysUsageTrayMonitor</RootNamespace>
-    <AssemblyName>SysUsageTrayMonitor</AssemblyName>
+    <RootNamespace>Tray.Observers</RootNamespace>
+    <AssemblyName>Tray.Observers</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SysUsageTrayMonitor.Program</StartupObject>
+    <StartupObject>Tray.Observers.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\main.ico</ApplicationIcon>

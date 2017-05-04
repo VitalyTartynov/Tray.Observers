@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
-using SysUsageTrayMonitor.Resources;
 
-namespace SysUsageTrayMonitor
+namespace Tray.Observers
 {
     static class Program
     {
