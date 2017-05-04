@@ -58,18 +58,26 @@ namespace SysUsageTrayMonitor.Base
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            _cpuIcon.Icon = CreateIcon(Convert.ToInt32(_cpuCounter.NextValue()), Color.OrangeRed);
-            _memoryIcon.Icon = CreateIcon(Convert.ToInt32(_memoryCounter.NextValue()), Color.Yellow);
-            _ioIcon.Icon = CreateIcon(Convert.ToInt32(_ioCounter.NextValue()), Color.LightBlue);
+            try
+            {
+                _cpuIcon.Icon = CreateIcon(Convert.ToInt32(_cpuCounter.NextValue()), Color.OrangeRed);
+                _memoryIcon.Icon = CreateIcon(Convert.ToInt32(_memoryCounter.NextValue()), Color.Yellow);
+                _ioIcon.Icon = CreateIcon(Convert.ToInt32(_ioCounter.NextValue()), Color.LightBlue);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private Icon CreateIcon(int value, Color color)
         {
             var brush = new SolidBrush(color);
             var bitmap = new Bitmap(32, 32);
+            var font = new Font("Tahoma", 16, FontStyle.Bold);
             var graphics = Graphics.FromImage(bitmap);
             var leftMargin = value > 9 ? 1 : 7;
-            graphics.DrawString(value.ToString(), new Font("Tahoma", 16, FontStyle.Bold), brush, leftMargin, 2);
+            graphics.DrawString(value.ToString(), font, brush, leftMargin, 2);
 
             return Icon.FromHandle(bitmap.GetHicon());
         }
