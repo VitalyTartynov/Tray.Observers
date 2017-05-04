@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace SysUsageTrayMonitor.Base
 {
     class SystemTrayApplication : IDisposable
     {
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        extern static bool DestroyIcon(IntPtr handle);
+
         private Timer _timer;
         private readonly NotifyIcon _cpuIcon;
         private readonly NotifyIcon _memoryIcon;
@@ -60,6 +64,10 @@ namespace SysUsageTrayMonitor.Base
         {
             try
             {
+                if (_cpuIcon != null && _cpuIcon.Icon != null) DestroyIcon(_cpuIcon.Icon.Handle);
+                if (_memoryIcon != null && _memoryIcon.Icon != null) DestroyIcon(_memoryIcon.Icon.Handle);
+                if (_ioIcon != null && _ioIcon.Icon != null) DestroyIcon(_ioIcon.Icon.Handle);
+
                 _cpuIcon.Icon = CreateIcon(Convert.ToInt32(_cpuCounter.NextValue()), Color.OrangeRed);
                 _memoryIcon.Icon = CreateIcon(Convert.ToInt32(_memoryCounter.NextValue()), Color.Yellow);
                 _ioIcon.Icon = CreateIcon(Convert.ToInt32(_ioCounter.NextValue()), Color.LightBlue);
