@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SysUsage", "SysUsage\SysUsage.csproj", "{AC584136-457D-4C77-8731-4CC6B47004F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tray.Observers", "Tray.Observers\Tray.Observers.csproj", "{AC584136-457D-4C77-8731-4CC6B47004F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
