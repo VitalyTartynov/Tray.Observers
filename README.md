@@ -1,4 +1,6 @@
-# SysUsage
+# Tray.Observers
+
+[![Build Status](https://travis-ci.org/VitalyTartynov/Tray.Observers.svg?branch=master)](https://travis-ci.org/VitalyTartynov/Tray.Observers)
 
 Simple tool for monitoring MS Windows parameters. 
 Monitoring % cpu, % memory, % IO disk usages
