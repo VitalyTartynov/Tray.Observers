@@ -19,7 +19,7 @@ namespace Tray.Observers
                     return;
                 }
 
-                using (var application = new SystemTrayApplication())
+                using (var application = new TrayApplication())
                 {
                     Application.Run();
                 }

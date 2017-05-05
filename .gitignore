@@ -5,6 +5,6 @@
 bin/
 obj/
 .vs/
+packages/
 *.suo
 *.user
-*.DotSettings
