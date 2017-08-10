@@ -6,7 +6,9 @@
 // \***************************************************************************/
 
 using System;
-using System.Windows.Forms;
+using System.Windows;
+using Application = System.Windows.Forms.Application;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Tray.Observers
 {
@@ -15,19 +17,11 @@ namespace Tray.Observers
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            var dialog = new ChartForm();
-            dialog.ShowDialog();
-
-            return;
-
             using (var runner = new SingleRunChecker())
             {
                 if (!runner.ApplicationMayRun)
                 {
-                    MessageBox.Show(Localization.ApplicationIsAlreadyRunning, Localization.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(Localization.ApplicationIsAlreadyRunning, Localization.Warning, MessageBoxButton.OK, MessageBoxImage.Warning);
                     Application.Exit();
 
                     return;

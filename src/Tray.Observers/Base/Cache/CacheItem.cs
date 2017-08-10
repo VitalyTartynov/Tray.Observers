@@ -5,9 +5,9 @@ namespace Tray.Observers
     class CacheItem
     {
         public DateTime Stamp { get; }
-        public int Value { get; }
+        public double Value { get; }
 
-        public CacheItem(DateTime stamp, int value)
+        public CacheItem(DateTime stamp, double value)
         {
             Stamp = stamp;
             Value = value;

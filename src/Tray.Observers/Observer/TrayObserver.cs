@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           TrayObserver.cs
+// Created:            10.08.2017
+// \***************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -14,7 +21,7 @@ namespace Tray.Observers
         private readonly NotifyIcon _notifyIcon;
         private readonly Dictionary<int, Icon> _iconCache = new Dictionary<int, Icon>();
 
-        internal readonly Cache Cache = new Cache(15);
+        internal readonly Cache Cache = new Cache(32);
 
         public TrayObserver(string name, Color color, PerformanceCounter counter, ContextMenu menu)
         {
@@ -32,8 +39,15 @@ namespace Tray.Observers
 
         private void OnMouseClick(object sender, MouseEventArgs mouseEventArgs)
         {
-            var t = new ChartForm();
-            t.Show();
+            var chartVm = new ChartVm(Cache);
+            var chartWindow = new ChartWindow
+            {
+                DataContext = chartVm,
+                ShowActivated = true
+            };
+
+            chartWindow.Closing += (o, args) => { chartVm.Unsubscribe(); };
+            chartWindow.Show();
         }
 
         public void Update()
