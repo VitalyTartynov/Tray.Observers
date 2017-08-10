@@ -13,7 +13,9 @@ namespace Tray.Observers
 
         public ChartVm(Cache cache)
         {
-            PlotData = new PlotModel {Title = "График"};
+            PlotData = new PlotModel { Title = "График" };
+
+            _cache = cache;
             _data = new LineSeries();
 
             foreach (var element in cache.GetAll())
@@ -26,7 +28,7 @@ namespace Tray.Observers
             PlotData.Axes.Add(new LinearAxis {Maximum = 100, Minimum = 0});
             PlotData.Series.Add(_data);
 
-            cache.OnValuesChanged += OnValuesChanged;
+            _cache.OnValuesChanged += OnValuesChanged;
         }
 
         private void OnValuesChanged(object sender, AddingNewItemEventArgs addingNewItemEventArgs)
@@ -39,7 +41,7 @@ namespace Tray.Observers
             var newPoint = addingNewItemEventArgs.NewItem as CacheItem;
 
             _data.Points.Add(new DataPoint(DateTimeAxis.ToDouble(newPoint.Stamp), newPoint.Value));
-            PlotData.PlotView.InvalidatePlot();
+            PlotData.InvalidatePlot(true);
         }
 
         public PlotModel PlotData { get; set; }
