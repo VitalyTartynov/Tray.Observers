@@ -1,2 +1,2 @@
 language: csharp
-solution: Tray.Observers.sln
+solution: src\Tray.Observers.sln

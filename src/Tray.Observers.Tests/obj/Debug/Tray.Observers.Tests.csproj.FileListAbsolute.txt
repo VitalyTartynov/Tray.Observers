@@ -1,0 +1,10 @@
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\Tray.Observers.Tests.dll
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\Tray.Observers.Tests.pdb
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\Castle.Core.dll
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\Moq.dll
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\nunit.framework.dll
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\Moq.pdb
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\Moq.xml
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\bin\Debug\nunit.framework.xml
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\obj\Debug\Tray.Observers.Tests.dll
+C:\Repos\GitHub\Tray.Observers\src\Tray.Observers.Tests\obj\Debug\Tray.Observers.Tests.pdb

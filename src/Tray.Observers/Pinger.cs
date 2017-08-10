@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           Pinger.cs
+// Created:            05.05.2017
+// \***************************************************************************/
+
+using System;
 using System.Net.NetworkInformation;
 
 namespace Tray.Observers
@@ -13,7 +20,7 @@ namespace Tray.Observers
                 using (var pinger = new Ping())
                 {
                     var reply = pinger.Send(host, 3000);
-                    if (reply.Status == IPStatus.Success)
+                    if (reply != null && reply.Status == IPStatus.Success)
                     {
                         return true;
                     }
@@ -21,7 +28,7 @@ namespace Tray.Observers
             }
             catch (Exception)
             {
-                
+                // ignored
             }
 
             return false;

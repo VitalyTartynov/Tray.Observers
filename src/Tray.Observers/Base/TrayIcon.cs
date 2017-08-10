@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           TrayIcon.cs
+// Created:            10.08.2017
+// \***************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -7,16 +14,14 @@ using System.Windows.Forms;
 
 namespace Tray.Observers
 {
-    class TrayObserver : IDisposable
+    class TrayIcon : IDisposable
     {
         private readonly Color _color;
         private readonly PerformanceCounter _counter;
         private readonly NotifyIcon _notifyIcon;
         private readonly Dictionary<int, Icon> _iconCache = new Dictionary<int, Icon>();
-        
-        internal readonly Cache Cache = new Cache(15);
 
-        public TrayObserver(string name, Color color, PerformanceCounter counter, ContextMenu menu)
+        public TrayIcon(string name, Color color, PerformanceCounter counter, ContextMenu menu)
         {
             _color = color;
             _counter = counter;
@@ -26,14 +31,6 @@ namespace Tray.Observers
                 Visible = true,
                 ContextMenu = menu
             };
-
-            _notifyIcon.MouseClick += OnMouseClick;
-        }
-
-        private void OnMouseClick(object sender, MouseEventArgs mouseEventArgs)
-        {
-            var t = new ChartForm();
-            t.Show();
         }
 
         public void Update()
@@ -48,8 +45,6 @@ namespace Tray.Observers
             var newIcon = IconHelper.Create(value, _color);
             _iconCache.Add(value, newIcon);
             _notifyIcon.Icon = newIcon;
-
-            Cache.Add(new CacheItem(DateTime.Now, value));
         }
 
         public void Dispose()

@@ -13,7 +13,7 @@ namespace Tray.Observers
             var myModel = new PlotModel { Title = "Example 1" };
             myModel.Series.Add(new FunctionSeries(Math.Cos, 0, 10, 0.1, "cos(x)"));
             
-            this.plot1.Model = myModel;
+            plot1.Model = myModel;
         }
     }
 }

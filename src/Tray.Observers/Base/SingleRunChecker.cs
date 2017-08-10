@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           SingleRunChecker.cs
+// Created:            05.05.2017
+// \***************************************************************************/
+
+using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;

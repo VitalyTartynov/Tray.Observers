@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           IconHelper.cs
+// Created:            05.05.2017
+// \***************************************************************************/
+
+using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 

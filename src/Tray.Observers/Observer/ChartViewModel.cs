@@ -11,8 +11,8 @@ namespace Tray.Observers
 
         public ChartViewModel()
         {
-            this.Title = "Example 2";
-            this.Points = new List<DataPoint>
+            Title = "Example 2";
+            Points = new List<DataPoint>
             {
                 new DataPoint(0, 4),
                 new DataPoint(10, 13),
