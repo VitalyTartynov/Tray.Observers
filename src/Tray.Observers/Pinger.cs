@@ -20,7 +20,7 @@ namespace Tray.Observers
                 using (var pinger = new Ping())
                 {
                     var reply = pinger.Send(host, 3000);
-                    if (reply.Status == IPStatus.Success)
+                    if (reply != null && reply.Status == IPStatus.Success)
                     {
                         return true;
                     }
@@ -28,7 +28,7 @@ namespace Tray.Observers
             }
             catch (Exception)
             {
-
+                // ignored
             }
 
             return false;
