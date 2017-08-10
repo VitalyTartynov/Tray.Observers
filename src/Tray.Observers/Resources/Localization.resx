@@ -120,6 +120,9 @@
   <data name="ApplicationIsAlreadyRunning" xml:space="preserve">
     <value>The application is already running!</value>
   </data>
+  <data name="Chart" xml:space="preserve">
+    <value>Chart</value>
+  </data>
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>

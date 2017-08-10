@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using OxyPlot;
 using OxyPlot.Axes;
+using Tray.Observers.Resources;
 using LineSeries = OxyPlot.Series.LineSeries;
 
 namespace Tray.Observers
@@ -11,9 +12,9 @@ namespace Tray.Observers
         private readonly LineSeries _data;
         private readonly Cache _cache;
 
-        public ChartVm(Cache cache)
+        public ChartVm(Cache cache, string name)
         {
-            PlotData = new PlotModel { Title = "График" };
+            PlotData = new PlotModel { Title = $"{Localization.Chart}: {name}" };
 
             _cache = cache;
             _data = new LineSeries();

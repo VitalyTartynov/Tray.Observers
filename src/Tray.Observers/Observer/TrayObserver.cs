@@ -39,7 +39,7 @@ namespace Tray.Observers
 
         private void OnMouseClick(object sender, MouseEventArgs mouseEventArgs)
         {
-            var chartVm = new ChartVm(Cache);
+            var chartVm = new ChartVm(Cache, _notifyIcon.Text);
             var chartWindow = new ChartWindow
             {
                 DataContext = chartVm,

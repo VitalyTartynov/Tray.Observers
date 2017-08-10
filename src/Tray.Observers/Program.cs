@@ -8,6 +8,7 @@
 using System;
 using System.Windows;
 using Application = System.Windows.Forms.Application;
+using Localization = Tray.Observers.Resources.Localization;
 using MessageBox = System.Windows.MessageBox;
 
 namespace Tray.Observers
