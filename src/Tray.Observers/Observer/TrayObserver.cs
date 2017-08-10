@@ -53,6 +53,7 @@ namespace Tray.Observers
         public void Update()
         {
             var value = Convert.ToInt32(_counter.NextValue());
+            Cache.Add(new CacheItem(DateTime.Now, value));
             if (_iconCache.ContainsKey(value))
             {
                 _notifyIcon.Icon = _iconCache[value];
@@ -62,8 +63,6 @@ namespace Tray.Observers
             var newIcon = IconHelper.Create(value, _color);
             _iconCache.Add(value, newIcon);
             _notifyIcon.Icon = newIcon;
-
-            Cache.Add(new CacheItem(DateTime.Now, value));
         }
 
         public void Dispose()
