@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           SystemTrayApplication.cs
+// Created:            10.08.2017
+// \***************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -16,7 +23,7 @@ namespace Tray.Observers
         {
             _timer = new Timer
             {
-                Interval = 1000                
+                Interval = 1000
             };
             _timer.Tick += Timer_Tick;
 
@@ -31,7 +38,7 @@ namespace Tray.Observers
                 counter: new PerformanceCounter("Память", "% использования выделенной памяти"), menu: contextMenu));
             _icons.Add(new TrayIcon(name: Localization.UsingDiskTooltip, color: Color.LightBlue,
                 counter: new PerformanceCounter("Физический диск", "% активности диска", "_Total"), menu: contextMenu));
-            
+
             _timer.Start();
         }
 
@@ -46,7 +53,7 @@ namespace Tray.Observers
         private void OnExitClick(object sender, EventArgs e)
         {
             Application.Exit();
-        }        
+        }
 
         public void Dispose()
         {

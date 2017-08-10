@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           TrayIcon.cs
+// Created:            10.08.2017
+// \***************************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;

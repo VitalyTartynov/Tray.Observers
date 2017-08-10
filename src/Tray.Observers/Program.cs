@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           Program.cs
+// Created:            05.05.2017
+// \***************************************************************************/
+
+using System;
 using System.Windows.Forms;
 
 namespace Tray.Observers
@@ -10,7 +17,7 @@ namespace Tray.Observers
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
             using (var runner = new SingleRunChecker())
             {
                 if (!runner.ApplicationMayRun)
@@ -19,11 +26,12 @@ namespace Tray.Observers
                     return;
                 }
 
+                // ReSharper disable once UnusedVariable
                 using (var application = new SystemTrayApplication())
                 {
                     Application.Run();
                 }
-            }            
+            }
         }
     }
 }

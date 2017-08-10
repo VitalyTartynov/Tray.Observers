@@ -1,4 +1,11 @@
-﻿using System;
+﻿// \***************************************************************************/
+// Solution:           Tray.Observers
+// Project:            Tray.Observers
+// Filename:           Pinger.cs
+// Created:            05.05.2017
+// \***************************************************************************/
+
+using System;
 using System.Net.NetworkInformation;
 
 namespace Tray.Observers
@@ -21,7 +28,7 @@ namespace Tray.Observers
             }
             catch (Exception)
             {
-                
+
             }
 
             return false;
