@@ -7,6 +7,7 @@ src/packages/
 src/Tray.Observers/obj/
 src/Tray.Observers.Tests/obj/
 .vs/*
+.idea/
 *.suo
 *.user
 *.DotSettings
